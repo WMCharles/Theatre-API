@@ -31,7 +31,16 @@ class ProductionsController < ApplicationController
         else
             render json: {error: "Production Not Found"}, status: :not_found
         end
+    end
 
+    def destroy
+        production = Production.find_by(id: params[:id])
+        if production
+            production.destroy
+            head :no_content
+        else
+            render json: {error: "Production Not Found"}, status: :not_found
+        end
     end
 
     private
